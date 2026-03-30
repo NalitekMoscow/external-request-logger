@@ -56,7 +56,8 @@ def log_request(attrs_to_mask=("Authorization", "access_token", "token", "refres
             f"ВНЕШНИЙ ЗАПРОС {url}",
             extra={
                 **default_log_request_data,
-                "response_data": json.dumps(RequestLogService.mask_attrs(attrs_to_mask, response_data), ensure_ascii=False),
+                "response_data": json.dumps(RequestLogService.mask_attrs(attrs_to_mask, response_data),
+                                            ensure_ascii=False),
                 "status_code": response.status_code,
                 "duration_ms": end_time - default_log_request_data.get("request_timestamp"),
                 "response_headers": json.dumps(
@@ -124,12 +125,12 @@ class RequestLogService:
 
     @staticmethod
     def default_log_request_data(
-        url: str,
-        method: str,
-        attrs_to_mask: tuple = (),
-        request_payload: dict = None,
-        request_headers: dict = None,
-        request_query_params: dict = None,
+            url: str,
+            method: str,
+            attrs_to_mask: tuple = (),
+            request_payload: dict = None,
+            request_headers: dict = None,
+            request_query_params: dict = None,
     ) -> dict:
         return {
             "request_payload": json.dumps(
